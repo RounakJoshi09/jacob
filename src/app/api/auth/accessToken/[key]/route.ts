@@ -16,6 +16,8 @@ export async function GET(_req: NextRequest, { params }: { params: Params }) {
       .get("accessToken")
       .delete();
 
+    console.log({accessToken});
+
     return NextResponse.json({ data: { accessToken } });
   } catch (error) {
     console.log(error);
@@ -31,6 +33,8 @@ export async function POST(req: NextRequest, { params }: { params: Params }) {
   const { accessToken } = (await req.json()) as { accessToken?: string };
 
   console.log(`postAccessToken: initiated with writeKey: ${writeKey}`);
+  console.log(`postAccessToken: ${accessToken}`);
+
 
   try {
     const rowsUpdated = await db.tokens

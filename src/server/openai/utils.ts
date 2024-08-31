@@ -82,9 +82,10 @@ export const sendSelfConsistencyChainOfThoughtGptRequest = async (
   //   "gpt-4-0125-preview",
   // ],
   models: Model[] = [
-    "claude-3-5-sonnet-20240620",
-    "gpt-4o-2024-08-06",
-    "claude-3-5-sonnet-20240620",
+    "gemini-1.5-flash-latest"
+    // "claude-3-5-sonnet-20240620",
+    // "gpt-4o-2024-08-06",
+    // "claude-3-5-sonnet-20240620",
     // "gemini-1.5-pro-exp-0801",
   ],
   minTemperature = 0.2,
@@ -121,6 +122,8 @@ export const sendSelfConsistencyChainOfThoughtGptRequest = async (
 
     const initialResults = await Promise.all(initialPromises);
     const validResults = initialResults.filter((result) => !!result?.response);
+
+    return validResults.join('');
 
     const evaluationPromises = validResults.map((result) => {
       if (result) {

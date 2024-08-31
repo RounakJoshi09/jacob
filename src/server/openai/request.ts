@@ -40,6 +40,7 @@ const CONTEXT_WINDOW = {
   "llama-3-sonar-small-32k-online": 32768,
   "llama3.1-8b": 8192,
   "llama3.1-70b": 8192,
+  "gpt-4o-mini":8192,
 };
 
 // Note that gpt-4-turbo-2024-04-09 has a max_tokens limit of 4K, despite having a context window of 128K
@@ -63,6 +64,7 @@ export const MAX_OUTPUT = {
   "llama-3-sonar-small-32k-online": 4096,
   "llama3.1-8b": 4096,
   "llama3.1-70b": 4096,
+  "gpt-4o-mini":4096,
 };
 
 const ONE_MILLION = 1000000;
@@ -86,6 +88,7 @@ const INPUT_TOKEN_COSTS = {
   "llama-3-sonar-small-32k-online": 1 / ONE_MILLION,
   "llama3.1-8b": 0.1 / ONE_MILLION,
   "llama3.1-70b": 0.6 / ONE_MILLION,
+  "gpt-4o-mini":0.6 / ONE_MILLION
 };
 const OUTPUT_TOKEN_COSTS = {
   "gpt-4-turbo-2024-04-09": 30 / ONE_MILLION,
@@ -107,8 +110,10 @@ const OUTPUT_TOKEN_COSTS = {
   "llama-3-sonar-small-32k-online": 1 / ONE_MILLION,
   "llama3.1-8b": 0.1 / ONE_MILLION,
   "llama3.1-70b": 0.6 / ONE_MILLION,
+  "gpt-4o-mini":0.6 / ONE_MILLION
 };
 const PORTKEY_VIRTUAL_KEYS = {
+  "gpt-4o-mini": process.env.PORTKEY_VIRTUAL_KEY_OPENAI,
   "gpt-4-turbo-2024-04-09": process.env.PORTKEY_VIRTUAL_KEY_OPENAI,
   "gpt-4-0125-preview": process.env.PORTKEY_VIRTUAL_KEY_OPENAI,
   "gpt-4o-2024-05-13": process.env.PORTKEY_VIRTUAL_KEY_OPENAI,
@@ -428,7 +433,7 @@ export const sendGptVisionRequest = async (
   retries = 3,
   delay = 60000,
 ): Promise<string | null> => {
-  const model: Model = "gpt-4o-2024-08-06";
+  const model: Model = "gemini-1.5-flash-latest";
 
   if (!snapshotUrl?.length) {
     // TODO: change this to sendSelfConsistencyChainOfThoughtGptRequest(
@@ -437,7 +442,7 @@ export const sendGptVisionRequest = async (
       systemPrompt,
       temperature,
       baseEventData,
-      retries,
+      0,
       delay,
       null,
     );

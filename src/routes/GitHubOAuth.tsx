@@ -41,7 +41,6 @@ export function GitHubOAuth({ redirectURI }: { redirectURI: string }) {
   const state = searchParams?.get("state");
   const figma = searchParams?.get("figma");
   const writeKeyParam = searchParams?.get("writeKey");
-
   // Remove the writeKey from the URL
   // after storing it in state and writing it to a cookie
   useEffect(() => {
@@ -126,6 +125,9 @@ export function GitHubOAuth({ redirectURI }: { redirectURI: string }) {
           const { data } =
             (await accessTokenResponse.json()) as AuthJSONResponse;
           const accessToken = data?.token;
+
+          console.log(`Acccess Token: `,accessToken);
+
           setAccessToken(accessToken);
 
           setError(undefined);

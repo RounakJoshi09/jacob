@@ -11,7 +11,7 @@
     "dev": "run-p dev:app dev:listener dev:wss",
     "dev:app": "next dev",
     "dev:listener": "tsx watch src/server/messaging/listener.ts",
-    "dev:wss": "PORT=3001 tsx watch src/server/wssDevServer.cts",
+    "dev:wss": "set PORT=3001 && tsx watch src/server/wssDevServer.cts",
     "lint": "next lint",
     "start": "NODE_ENV=production tsx src/server/prodServer.cts",
     "lint:fix": "next lint --fix",
